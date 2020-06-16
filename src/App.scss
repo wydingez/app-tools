@@ -1,6 +1,11 @@
 @import '~antd/dist/antd.css';
 
 .app {
+  &-main {
+    padding: 0 50px;
+    margin-top: 64px;
+    min-height: calc(100vh - 70px - 64px);
+  }
   &-footer {
     position: fixed;
     width: 100%;

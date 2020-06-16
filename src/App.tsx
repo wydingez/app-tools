@@ -15,7 +15,7 @@ function App() {
           <Menu.Item key="3">nav 3</Menu.Item>
         </Menu>
       </Header>
-      <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+      <Content className="app-main" style={{ padding: '0 50px', marginTop: 64 }}>
         <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
           Content
         </div>
