@@ -1,0 +1,10 @@
+@import '~antd/dist/antd.css';
+
+.app {
+  &-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+  }
+}
