@@ -1,27 +1,69 @@
-import React from 'react';
-import './App.scss';
-import { Layout, Menu } from 'antd';
+import React, { useState, useEffect } from 'react'
+import './App.scss'
+import { Layout, Menu } from 'antd'
+import { 
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link
+}  from 'react-router-dom';
+import router from './router'
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer } = Layout
+
+interface RouteInfo {
+  url: string;
+  name: string;
+  component: React.FunctionComponent
+}
+
+let rs : RouteInfo[] = []
+
+const getRoutes = async () => {
+  rs = await router()
+}
+getRoutes()
 
 function App() {
+  const [routes, setRoutes] = useState<RouteInfo[]>([])
+  
+  useEffect(() => {
+    setRoutes(rs)
+  }, [])
+
   return (
-    <Layout className="app">
-      <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
-      </Header>
-      <Content className="app-main" style={{ padding: '0 50px', marginTop: 64 }}>
-        <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-          Content
-        </div>
-      </Content>
-      <Footer className="app-footer">Ant Design ©2018 Created by Ant UED</Footer>
-    </Layout>
+    <>
+      <Router>
+        <Layout className="app">
+          <Header className="app-header">
+            <div className="logo" />
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['/page1']}>
+              {
+                routes.map(item => (
+                  <Menu.Item key={item.url}>
+                    <Link to={item.url}>{item.name}</Link>
+                  </Menu.Item>
+                ))
+              }
+            </Menu>
+          </Header>
+          <Content className="app-main">
+            <div className="app-main-background">
+              <Switch>
+                {
+                  routes.map(item => (
+                    <Route path={item.url} key={item.url}>
+                      {item.component}
+                    </Route>
+                  ))
+                }
+              </Switch>
+            </div>
+          </Content>
+          <Footer className="app-footer">App tools ©2020 Created by wydingez</Footer>
+        </Layout>
+      </Router>
+    </>
   )
 }
 
