@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './App.scss'
 import { Layout, Menu } from 'antd'
 import { 
@@ -17,19 +17,8 @@ interface RouteInfo {
   component: React.FunctionComponent
 }
 
-let rs : RouteInfo[] = []
-
-const getRoutes = async () => {
-  rs = await router()
-}
-getRoutes()
-
 function App() {
-  const [routes, setRoutes] = useState<RouteInfo[]>([])
-  
-  useEffect(() => {
-    setRoutes(rs)
-  }, [])
+  const [routes] = useState<RouteInfo[]>(router())
 
   return (
     <>
