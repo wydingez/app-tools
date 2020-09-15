@@ -14,11 +14,12 @@ const { Header, Content, Footer } = Layout
 interface RouteInfo {
   url: string;
   name: string;
-  component: React.FunctionComponent
+  component: React.FunctionComponent | React.ComponentClass<any, any>
 }
 
 function App() {
   const [routes] = useState<RouteInfo[]>(router())
+  const defalutPage: string = router()[0].url
 
   return (
     <>
@@ -26,7 +27,7 @@ function App() {
         <Layout className="app">
           <Header className="app-header">
             <div className="logo" />
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['/page1']}>
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[defalutPage]}>
               {
                 routes.map(item => (
                   <Menu.Item key={item.url}>
@@ -41,9 +42,7 @@ function App() {
               <Switch>
                 {
                   routes.map(item => (
-                    <Route path={item.url} key={item.url}>
-                      {item.component}
-                    </Route>
+                    <Route path={item.url} key={item.url} component={item.component} />
                   ))
                 }
               </Switch>

@@ -1,12 +1,12 @@
-import Page1 from './pages/page1'
+import JsonUtil from './pages/json-util'
 import Page2 from './pages/page2'
 
 export default function () {
   return [
     {
-      url: '/page1',
-      component: Page1,
-      name: 'Page1'
+      url: '/json-util',
+      component: JsonUtil,
+      name: 'JSON'
     }, {
       url: '/page2',
       component: Page2,
