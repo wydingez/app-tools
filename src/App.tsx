@@ -5,7 +5,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link
+  Link,
+  Redirect
 }  from 'react-router-dom';
 import router from './router'
 
@@ -45,6 +46,7 @@ function App() {
                     <Route path={item.url} key={item.url} component={item.component} />
                   ))
                 }
+                <Redirect from="/" to={defalutPage}></Redirect>
               </Switch>
             </div>
           </Content>

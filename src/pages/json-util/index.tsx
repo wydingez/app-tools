@@ -1,5 +1,6 @@
 import React from 'react';
-import { Input } from 'antd';
+import { Input, Row, Col } from 'antd';
+import ReactJson from 'react-json-view';
 
 const { TextArea } = Input;
 
@@ -11,7 +12,8 @@ export default class JsonUtil extends React.Component<any, any> {
   constructor (props: Props) {
     super(props)
     this.state = {
-      val: props.val || ''
+      val: props.val || '',
+      jsonObj: {}
     }
     this.resetJsonVal = this.resetJsonVal.bind(this)
   }
@@ -20,7 +22,10 @@ export default class JsonUtil extends React.Component<any, any> {
     let value = e.target.value
     try {
       let obj = JSON.parse(value)
-      this.setState({ val: JSON.stringify(obj, null, 4) })
+      this.setState({ 
+        val: JSON.stringify(obj, null, 4),
+        jsonObj: obj
+      })
     } catch (e) {
       console.error(e)
       this.setState({ val: value })
@@ -30,10 +35,14 @@ export default class JsonUtil extends React.Component<any, any> {
   render () {
     return (
       <div className="json-util-wrapper">
-        <div className="json-util-left">
-          <TextArea value={this.state.val} onChange={this.resetJsonVal} autoSize/>
-        </div>
-        <div className="json-util-right">right</div>
+        <Row gutter={16}>
+          <Col md={12} className="json-util-left">
+            <TextArea value={this.state.val} onChange={this.resetJsonVal} rows={30}/>
+          </Col>
+          <Col md={12} className="json-util-right">
+            <ReactJson src={this.state.jsonObj} />
+          </Col>
+        </Row>
       </div>
     )
   }
