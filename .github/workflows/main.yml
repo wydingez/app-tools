@@ -37,5 +37,5 @@ jobs:
           USERNAME: ${{ secrets.DEPLOY_USER }} 
           PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
           HOST: ${{ secrets.DEPLOY_HOST }}
-          SOURCE: 'public'
+          SOURCE: 'build'
           TARGET: '/home/wyd/project/tools/'
